@@ -32,27 +32,25 @@ if (isset($_GET['MovieID'])) {
 }
 ?>
 
-<h1 align="center"> Edit Movie </h1>
+<h1 align="center"> Edit Book</h1>
 <form action="update.php" method="post">
     <input type="hidden" name="MovieID" value="<?php echo $movieID; // Keeps track of MovieID?>">
     <h3>Enter the name of the movie:</h3>
     <input type="text" name="movieName" value="<?php echo $movieName; ?>">
-    <h3>Would you recommend this movie?</h3>
+    <h3>Would you recommend this book?</h3>
     <!-- Every if statement below just makes it easier for the user to see what the current info is and change it accordingly -->
     <input type="radio" id="Yes" name="recommend" value="Yes" <?php if ($recommend === "Yes") echo "checked"; ?>>
     <label for="Yes"> Yes </label>
     <input type="radio" id="No" name="recommend" value="No" <?php if ($recommend === "No") echo "checked"; ?>>
     <label for="No"> No </label>
 
-    <h3>What is the movie's genre(s)?</h3>
+    <h3>What is the book's genre(s)?</h3>
     <input type="checkbox" id="Scifi" name="genre[]" value="Scifi" <?php if (strpos($genres, "Scifi") !== false) echo "checked"; ?>>
     <label for="Scifi"> Scifi</label><br>
 
     <input type="checkbox" id="Drama" name="genre[]" value="Drama" <?php if (strpos($genres, "Drama") !== false) echo "checked"; ?>>
     <label for="Drama"> Drama</label><br>
 
-    <input type="checkbox" id="Comedy" name="genre[]" value="Comedy" <?php if (strpos($genres, "Comedy") !== false) echo "checked"; ?>>
-    <label for="Comedy"> Comedy</label><br>
 
     <input type="checkbox" id="Horror" name="genre[]" value="Horror" <?php if (strpos($genres, "Horror") !== false) echo "checked"; ?>>
     <label for="Horror"> Horror</label><br>
@@ -66,10 +64,13 @@ if (isset($_GET['MovieID'])) {
     <input type="checkbox" id="Romance" name="genre[]" value="Romance" <?php if (strpos($genres, "Romance") !== false) echo "checked"; ?>>
     <label for="Romance"> Romance</label><br>
 
-    <input type="checkbox" id="Musical" name="genre[]" value="Musical" <?php if (strpos($genres, "Musical") !== false) echo "checked"; ?>>
-    <label for="Musical"> Musical</label><br>
+    <input type="checkbox" id="Non-Fiction" name="genre[]" value="Non-Fiction" <?php if (strpos($genres, "Non-Fiction") !== false) echo "checked"; ?>>
+    <label for="Non-Fiction"> Non-Fiction</label><br>
 
-    <h3>How would you rate this movie?</h3>
+    <input type="checkbox" id="Fiction" name="genre[]" value="Fiction" <?php if (strpos($genres, "Fiction") !== false) echo "checked"; ?>>
+    <label for="Fiction"> Fiction</label><br>
+
+    <h3>How would you rate this book?</h3>
     <select name="rating">
     <option value="1" <?php if ($rating == 1) echo "selected"; ?>>1</option>
     <option value="2" <?php if ($rating == 2) echo "selected"; ?>>2</option>
@@ -85,5 +86,5 @@ if (isset($_GET['MovieID'])) {
     <br>
 
     <!-- Submit button -->
-    <input type="submit" value="Update Movie Info">
+    <input type="submit" value="Update Book Info">
 </form>

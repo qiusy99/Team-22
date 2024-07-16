@@ -12,9 +12,15 @@
 </head>
 
 <body>
-    <h1 align="center">Admin Library Dashboard</h1>
+    <h1 align="center">Library</h1>
     <h4 align="center">
-        <a href="BookSearch.php">Go back to library dashboard</a>
+        Are you an admin?
+        <a href="index.php">Click here</a>
+        to edit the books!
+    </h4>
+    <h4 align="center">
+        Not logged in?
+    <a href = "../Library_Login.html"> Log in </a>
     </h4>
 
     <div align="center">
@@ -35,9 +41,6 @@
             </tbody>
         </table>
     </div>
-
-    <a href="adding.php">Add Books</a><br>
-
     <script>
 function updateTable(data) {
     $('#movieTable tbody').empty();
@@ -49,12 +52,6 @@ function updateTable(data) {
                 <td>${movie.Rating}</td>
                 <td>${movie.Recommend}</td>
                 <td>${movie.Genres}</td>
-                <td>
-                    <a href='edit.php?MovieID=${movie.MovieID}'>Edit</a>
-                </td>
-                <td>
-                    <a href='delete.php?MovieID=${movie.MovieID}'>Delete</a>
-                </td>
             </tr>
         `;
         $('#movieTable tbody').append(row);
