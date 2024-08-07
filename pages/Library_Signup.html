@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Library SignUp Page</title>
+    <link rel="stylesheet" type="text/css" href="../styles/Library_Signup.css">
+</head>
+<body>
+        <!--first page-->
+        <div class="title">Library SignUp Page</div>
+        <div class="signUp">
+            <span class="signUpTitle">SignUp</span>
+            <form action="../process/registerProcess.php" method="post">
+            <input type="text" name="username" style="color:#999" value="Username"
+                   onfocus="if(this.value=='Username'){this.value='';this.style.color='#424242'}"
+                   onblur="if(this.value==''){this.value='Username';this.style.color='#999'}">
+            <input type="text" name="password" style="color:#999" value="Password"
+                   onfocus="if(this.value=='Password'){this.value='';this.style.color='#424242'}"
+                   onblur="if(this.value==''){this.value='Password';this.style.color='#999'}">
+            <button type="submit" class="submit-button">Submit</button>
+            </form>
+        </div>
+</body>
+</html>
+
+<!-- if submit, redirect page to login page -->

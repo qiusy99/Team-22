@@ -1,0 +1,174 @@
+<!-- <html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-sacle=1">
+    <title>Library Login Page</title>
+    <link rel="stylesheet" type="text/css" href="../styles/Library_Login.css">
+</head>
+<body>
+	<span class="nav fr"><a href="Library_Signup.html">SignUp</a></span>
+
+    
+	<div class="layer">
+		<div class="title clearfix">Library Login Page</div>
+		<span class="body clearfix">
+			"Welcome to our library login page. Unlike traditional libraries, our online platform offers unparalleled flexibility and time-saving benefits. By digitizing our collection, we save space while ensuring easy access to a vast array of books. Check availability instantly and explore upcoming events with our user-friendly interface. Join us in embracing a smarter way to connect with knowledge and community."
+		</span>
+		<span class="signUp fr">
+            <span class="signUpTitle">Login</span>
+        <form action="../process/loginProcess.php" method="post">
+            <input type="text" name="Username" style="color:#999" value="Username"
+                onfocus="if(this.value=='Username'){this.value='';this.style.color='#424242'}"
+                onblur="if(this.value==''){this.value='Username';this.style.color='#999'}">
+            <input type="text" name="Password" style="color:#999" value="Password"
+                onfocus="if(this.value=='Password'){this.value='';this.type='password';this.style.color='#424242'}"
+                onblur="if(this.value==''){this.value='Password';this.type='text';this.style.color='#999'}">
+			<button type="submit" class="submit-button"> Login</button>
+        </form>
+		</span>
+	</div>
+
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Library Login Page</title>
+    <link rel="stylesheet" type="text/css" href="../styles/Library_Login.css">
+    <style>
+        /* Popup styles */
+        .modal {
+            display: none; 
+            position: fixed;
+            z-index: 1; 
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto; 
+            background-color: rgb(0,0,0); 
+            background-color: rgba(0,0,0,0.4); 
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .close {
+            color: #aaa;
+            position: absolute; 
+            top: 10px; 
+            right: 10px; 
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer; 
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <span class="nav fr"><a href="Library_Signup.html">SignUp</a></span>
+
+    <div class="layer">
+        <div class="title">Library Login Page</div>
+        <span class="body">
+            "Welcome to our library login page. Unlike traditional libraries, our online platform offers unparalleled flexibility and time-saving benefits. By digitizing our collection, we save space while ensuring easy access to a vast array of books. Check availability instantly and explore upcoming events with our user-friendly interface. Join us in embracing a smarter way to connect with knowledge and community."
+        </span>
+        <span class="signUp fr">
+            <span class="signUpTitle">Login</span>
+            <form id="loginForm" action="../process/loginProcess.php" method="post">
+                <input type="text" id="username" name="Username" style="color:#999" value="Username"
+                onfocus="if(this.value=='Username'){this.value='';this.style.color='#424242'}"
+                onblur="if(this.value==''){this.value='Username';this.style.color='#999'}">
+                <input type="text" id="password" name="Password" style="color:#999" value="Password"
+                onfocus="if(this.value=='Password'){this.value='';this.type='password';this.style.color='#424242'}"
+                onblur="if(this.value==''){this.value='Password';this.type='text';this.style.color='#999'}">
+                <button type="submit" class="submit-button">Login</button>
+            </form>
+        </span>
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <p>Invalid username or password. Please try again.</p>
+        </div>
+    </div>
+
+    <script>
+        var modal = document.getElementById("myModal");
+        var span = document.getElementById("closeModal");
+
+        function showModal() {
+            modal.style.display = "block";
+        }
+
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Handle form submission
+        document.getElementById("loginForm").onsubmit = function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            // Check if both username and password are incorrect
+            if (username === "Username" || password === "Password" || username === "" || password === "") {
+                showModal(); // Show modal if invalid
+            } 
+
+            else if (username === "Username" && password === "Password" && username === "" && password === "") {
+                showModal();
+            }
+            else {
+                this.submit();
+            }
+        };
+
+        // Adjust the password input type dynamically
+        document.getElementById("password").addEventListener("focus", function() {
+            if (this.value === "Password") {
+                this.type = "password";
+                this.value = "";
+                this.style.color = "#424242";
+            }
+        });
+
+        document.getElementById("password").addEventListener("blur", function() {
+            if (this.value === "") {
+                this.type = "text";
+                this.value = "Password";
+                this.style.color = "#999";
+            }
+        });
+    </script>
+</body>
+</html>
+
+

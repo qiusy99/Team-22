@@ -1,0 +1,96 @@
+body, html {
+  scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(to bottom, #6092A6, #CEECF2);
+  font-family: Arial, sans-serif;
+}
+
+.nav {
+  position: fixed; 
+  top: 10px; 
+  right: 10px; 
+  z-index: 1000; 
+  font-family: Arial, sans-serif;
+  font-size: 40px;
+}
+
+.nav a {
+  text-decoration: none;
+  color: black;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 24px;
+}
+
+.nav a:hover {
+  background-color: #a8c9e0;
+}
+
+header {
+  color: black;
+  padding: 100px 0; 
+  text-align: center;
+  width: 100%; 
+}
+
+header h1 {
+  font-size: 40px;
+}
+
+.body {
+  display: block; /* Make span behave like a block-level element */
+  max-width: 800px; /* Set a maximum width for the text */
+  margin: 20px auto; /* Center align the block */
+  padding: 20px;
+  background-color: transparent;
+  color: #333;
+  border-radius: 10px;
+}
+
+.clearfix::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around; /* Distribute space around items */
+  width: 90%;
+  margin: 0 auto;
+}
+
+.book-box, .event-box {
+  background-color: whitesmoke;
+  color: black;
+  padding: 60px;
+  text-align: center;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 28%;
+  font-size: 24px;
+  margin-top: -40px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s, box-shadow 0.3s; 
+  text-decoration: none;
+}
+
+.book-box {
+  margin-right: 50px;
+}
+
+.event-box {
+  margin-left: 50px; 
+}
+
+.book-box:hover, .event-box:hover {
+  background-color: #a8c9e0;
+  transform: scale(1.05) rotateX(5deg) rotateY(5deg);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+  text-decoration: none;
+}

@@ -6,6 +6,20 @@ html, body {
     height: 100%;
 }
 
+/* header {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    height: 100px; 
+    text-align: center; 
+    margin: 20px 0;
+    width: 100%; 
+  }
+
+header h1 {
+    font-size: 60px;
+} */
+
 body, p, h1, h2, h3, h4 {
     margin: 0;
 }
@@ -50,10 +64,10 @@ body {
     background-size: cover;
     background-position: center 0;
     background-repeat: no-repeat;
-	background-attachment: fixed;
-	-o-background-size: cover;
-	-moz-background-size: cover;
-	-ms-background-size: cover
+    background-attachment: fixed;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -ms-background-size: cover;
 }
 
 table {
@@ -66,7 +80,8 @@ th, td {
 
 .layer {
     margin: 0 auto;
-    width: 1190px;
+    width: 100%;
+    text-align: center;
 }
 
 .fl {
@@ -75,12 +90,6 @@ th, td {
 
 .fr {
     float: right;
-}
-
-.clearfix:after {
-    content: '';
-    display: block;
-    clear: both;
 }
 
 .home {
@@ -103,15 +112,21 @@ th, td {
 }
 
 .title {
-    margin-left: 150px;
-    padding-top: 200px;
+    margin: 50px auto;
+    margin-left: 50%;
+    padding-top: 100px;
     font-size: 40px;
+    white-space: nowrap;
+    position: relative;
+    justify-content: center; 
+    align-items: center; 
+    height: 100px; 
+    text-align: center; 
 }
 
 .body {
     display: block;
-    margin-left: 150px;
-    padding-top: 50px;
+    margin: 50px auto;
     width: 450px;
     font-size: 20px;
 }
@@ -121,9 +136,9 @@ th, td {
     background-color: white;
     width: 350px;
     height: 350px;
+    margin: 50px auto;
+    padding-top: 10px;
     position: relative;
-    margin-top: -325px;
-    margin-right: 150px;
 }
 
 .signUpTitle {
@@ -131,8 +146,8 @@ th, td {
     display: block;
     text-align: center;
     font-size: 20px;
-    margin-top: 30px;
-    margin-bottom: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 input {
