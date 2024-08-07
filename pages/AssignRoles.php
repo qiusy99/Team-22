@@ -121,7 +121,7 @@ $mysqli->close();
             font-size: 18px;
         }
         .top-right-buttons a:hover {
-            background-color: #c8f3e5;
+            background-color: #eec4f2;
         }
     </style>
 </head>

@@ -20,17 +20,17 @@ body, html {
     font-size: 40px;
   }
   
-  .container {
+ .container {
     display: flex;
     justify-content: center; /* Center the container */
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
   }
-  
-  .book-box, .event-box, .checkedout-box {
+
+  .book-box, .event-box, .checkedout-box, .reserv-box, .reserved-box {
     background-color: whitesmoke;
     color: black;
-    padding: 60px;
+    padding: 50px;
     text-align: center;
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -53,16 +53,25 @@ body, html {
     margin-left: 100px; 
     margin-right: 20%; 
   }
+  .reserv-box {
+    margin-left: -142px; 
+    margin-right: 20%; 
+  }
 
-  .book-box, .event-box, .checkedout-box {
+  .reserved-box {
+    margin-left: -150px; 
+    margin-right: 20%;
+  }
+
+  .book-box, .event-box, .checkedout-box, .reserv-box, .reserved-box {
     font-size: 24px;
   }
 
-  .book-box, .event-box, .checkedout-box {
+  .book-box, .event-box, .checkedout-box, .reserv-box, .reserved-box {
     margin-top: 50px; 
   }
   
-  .book-box:hover, .event-box:hover, .checkedout-box:hover {
+  .book-box:hover, .event-box:hover, .checkedout-box:hover, .reserv-box:hover, .reserved-box:hover {
     background-color: #a8c9e0;
     transform: scale(1.05) rotateX(5deg) rotateY(5deg);
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);

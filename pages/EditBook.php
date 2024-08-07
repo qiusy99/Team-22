@@ -91,7 +91,7 @@
         <h3>What is the book's genre(s)?</h3>
         <?php
         $genres = explode(", ", $book['Genres']);
-        $availableGenres = ['Scifi', 'Adventure', 'Horror', 'Historical', 'Fantasy', 'Romance', 'Non-Fiction', 'Fiction'];
+        $availableGenres = ['Scifi', 'Adventure', 'Horror', 'Historical', 'Fantasy', 'Romance', 'Non-Fiction', 'Fiction', 'Classic', 'Thriller'];
         foreach ($availableGenres as $genre) {
             $checked = in_array($genre, $genres) ? 'checked' : '';
             echo "<input type='checkbox' id='$genre' name='genre[]' value='$genre' $checked>";
@@ -105,6 +105,7 @@
     </form>
 </body>
 </html>
+
 
 <!-- Jingyi Fu modified Aug 3rd -->
  <!--  names changed -->

@@ -65,7 +65,7 @@ header h1 {
   margin: 0 auto;
 }
 
-.book-box, .event-box {
+.book-box, .event-box,.reserv-box{
   background-color: whitesmoke;
   color: black;
   padding: 60px;
@@ -88,7 +88,11 @@ header h1 {
   margin-left: 50px; 
 }
 
-.book-box:hover, .event-box:hover {
+.reserv-box{
+  margin: 0;
+}
+
+.book-box:hover, .event-box:hover,.reserv-box {
   background-color: #a8c9e0;
   transform: scale(1.05) rotateX(5deg) rotateY(5deg);
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);

@@ -1,70 +1,58 @@
 #!/usr/local/bin/php
 <?php
 session_start();
-
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Check if the user is logged in
-
-if (!isset($_SESSION['userId'])) {
-    echo json_encode(["status" => "error", "message" => "User not logged in."]);
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['role'])) {
+    echo json_encode(['message' => 'User not authenticated.']);
     exit();
 }
 
-$userId = $_SESSION['userId'];
+$userId = $_SESSION['user_id'];
+$userRole = $_SESSION['role'];
 
-$mysqli = new mysqli("mysql.cise.ufl.edu", "moore.cameron", "Sadie2012", "Team22");
-if ($mysqli->connect_errno) {
-    die("Failed to connect to MySQL: " . $mysqli->connect_error);
+if ($userRole !== 'employee' && $userRole !== 'admin') {
+    echo json_encode(['message' => 'Permission denied.']);
+    exit();
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $bookIds = $_POST['bookIds'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $bookId = $_POST['bookId'];
+    $checkoutUserId = $_POST['userId']; // ID of the user for whom the book is being checked out
+    $currentDate = date('Y-m-d');
+    $dueDate = date('Y-m-d', strtotime('+2 weeks'));
 
-    // Begin a transaction
+    $mysqli = new mysqli("mysql.cise.ufl.edu", "moore.cameron", "Sadie2012", "Team22");
+
+    if ($mysqli->connect_error) {
+        die("Connection failed: " . $mysqli->connect_error);
+    }
+
     $mysqli->begin_transaction();
 
     try {
-        foreach ($bookIds as $bookId) {
-            // Reduce the number of available copies of the book
-            $updateBookSql = "UPDATE Books SET BookCopies = BookCopies - 1 WHERE BookId = ? AND BookCopies > 0";
-            $updateBookStmt = $mysqli->prepare($updateBookSql);
-            if ($updateBookStmt === false) {
-                throw new Exception("Error preparing the statement: " . $mysqli->error);
-            }
+        // Insert checkout record
+        $stmt = $mysqli->prepare("INSERT INTO Checkouts (idLogin, BookId, CheckoutDate, DueDate) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param('iiss', $checkoutUserId, $bookId, $currentDate, $dueDate);
+        $stmt->execute();
 
-            $updateBookStmt->bind_param("i", $bookId);
-            if (!$updateBookStmt->execute()) {
-                throw new Exception("Error executing the statement: " . $updateBookStmt->error);
-            }
+        // Update book copies
+        $stmt = $mysqli->prepare("UPDATE Books SET BookCopies = BookCopies - 1 WHERE BookId = ?");
+        $stmt->bind_param('i', $bookId);
+        $stmt->execute();
 
-            // Insert a new checkout record
-            $insertCheckoutSql = "INSERT INTO Checkouts (BookId, idLogin) VALUES (?, ?)";
-            $insertCheckoutStmt = $mysqli->prepare($insertCheckoutSql);
-            if ($insertCheckoutStmt === false) {
-                throw new Exception("Error preparing the statement: " . $mysqli->error);
-            }
-
-            $insertCheckoutStmt->bind_param("ii", $bookId, $userId);
-            if (!$insertCheckoutStmt->execute()) {
-                throw new Exception("Error executing the statement: " . $insertCheckoutStmt->error);
-            }
-        }
-
-        // Commit the transaction
         $mysqli->commit();
-        echo "Books checked out successfully.";
-
+        $response = ['message' => 'Checkout successful.'];
     } catch (Exception $e) {
-        // Rollback the transaction on error
         $mysqli->rollback();
-        echo "Failed to checkout the books: " . $e->getMessage();
+        $response = ['message' => 'Checkout failed.'];
     }
 
-    $updateBookStmt->close();
-    $insertCheckoutStmt->close();
-}
+    $stmt->close();
+    $mysqli->close();
 
-$mysqli->close();
+    echo json_encode($response);
+}
 ?>
+

@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($stmt->execute()) {
         echo "Event created successfully!";
-        header("Location: ../pages/Events2.php");
+        header("Location: ../pages/Library_Admin_Home.php");
     } else {
         echo "Error: " . $stmt->error;
     }
@@ -47,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->close();
     $conn->close();
 } else {
-    header("Location: ../pages/AddEvent.php");
+    header("Location: ../pages/Library_Admin_Home.php");
     exit();
 }
 ?>

@@ -5,10 +5,9 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 if ( $_SESSION['role'] !== 'employee' && $_SESSION['role'] !== 'admin') {
-    header("Location: ../pages/Library_Login.html");
+    header("Location: Library_Admin_Home.php");
     exit();
 }
-echo $_SESSION['user_id']
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +21,7 @@ echo $_SESSION['user_id']
 
     <!-- Top Right Buttons -->
     <div class="top-right-buttons">
-        <a href="Library_Employee_Home.php">Home</a>
+        <a href="Library_Admin_Home.php">Home</a>
         <a href="../process/logoutProcess.php">LogOut</a>
     </div>
 

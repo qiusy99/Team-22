@@ -7,7 +7,7 @@ ini_set('display_errors', 1);
 
 // Check if the user is logged in and has the 'admin' role
 if (!isset($_SESSION['role']) || $_SESSION['role'] == 'member') {
-    header("Location: ../pages/Library_Login.html");
+    header("Location: Library_Login.html");
     exit();
 }
 ?>
@@ -53,14 +53,11 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] == 'member') {
 <body>
     <!-- Top Right Buttons -->
     <div class="top-right-buttons">
-        <a href="Library_Employee_Home.php">Home</a>
+        <a href="Library_Admin_Home.php">Home</a>
         <a href="../process/logoutProcess.php">LogOut</a>
     </div>
 
     <h1 align="center">Admin/Employee Library Dashboard</h1>
-    <h4 align="center">
-        <a href="BookSearch.php">Go back to library dashboard</a>
-    </h4>
 
     <div align="center">
         <input type="text" id="searchInput" placeholder="Search by Book name...">

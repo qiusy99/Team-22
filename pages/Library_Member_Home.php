@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 if ( $_SESSION['role'] !== 'member') {
-    header("Location: ../pages/Library_Login.html");
+    header("Location: Library_Login.html");
     exit();
 }
 ?>
@@ -27,9 +27,11 @@ if ( $_SESSION['role'] !== 'member') {
   </header>
 
   <div class="container">
-    <a href="MemberBook.php" class="book-box">Search Book</a>
-    <a href="Events.php" class="event-box">View Event</a>
-    <a href="Checkout.php" class="checkedout-box">Checked Out</a>
+    <a href="MemberBook.php" class="book-box">Search Books</a>
+    <a href="Events.php" class="event-box">View Events</a>
+    <a href="CheckedOutBooks.php" class="checkedout-box">Checked Out Books</a> </a>
+    <a href="Reservations.php" class="reserv-box">Event Reservations</a>
+    <a href="ReservedBooks.php" class="reserved-box">Reserved Books</a>
   </div>
 </body>
 </html>

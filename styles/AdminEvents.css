@@ -1,5 +1,8 @@
 body {
+    background: linear-gradient(to bottom, #6092A6, #CEECF2);
     font-family: Arial, sans-serif;
+    font-size: 16px;
+    height: 755px;
 }
 
 .top-right-buttons {

@@ -1,177 +1,137 @@
 #!/usr/local/bin/php
+<?php
+session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['role'])) {
+    header("Location: Library_Member_Home.php");
+    exit();
+}
+
+$userId = $_SESSION['user_id'];
+$userRole = $_SESSION['role'];
+
+// Get users for admin/employee role
+$users = [];
+if ($userRole === 'admin' || $userRole === 'employee') {
+    $mysqli = new mysqli("mysql.cise.ufl.edu", "moore.cameron", "Sadie2012", "Team22");
+    if ($mysqli->connect_error) {
+        die("Connection failed: " . $mysqli->connect_error);
+    }
+    $result = $mysqli->query("SELECT idLogin, username FROM Login");
+    if ($result) {
+        $users = $result->fetch_all(MYSQLI_ASSOC);
+        $result->free();
+    }
+    $mysqli->close();
+}
+?>
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Library Checkout Page</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
-        }
-        header {
-            background: #333;
-            color: #fff;
-            padding-top: 30px;
-            min-height: 70px;
-            border-bottom: #77b300 3px solid;
-        }
-        header a {
-            color: #fff;
-            text-decoration: none;
-            text-transform: uppercase;
-            font-size: 16px;
-        }
-        header ul {
-            padding: 0;
-            list-style: none;
-        }
-        header li {
-            display: inline;
-            padding: 0 20px 0 20px;
-        }
-        header #branding {
-            float: left;
-        }
-        header #branding h1 {
-            margin: 0;
-        }
-        header nav {
-            float: right;
-            margin-top: 10px;
-        }
-        table {
-            width: 100%;
-            margin-top: 20px;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-        th, td {
-            padding: 12px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .tab-content {
-            display: none;
-        }
-        .tab-content.active {
-            display: block;
-        }
-    </style>
-    <script>
-        function showTab(event, tabId) {
-            // Hide all tab contents
-            var tabContents = document.getElementsByClassName('tab-content');
-            for (var i = 0; i < tabContents.length; i++) {
-                tabContents[i].classList.remove('active');
-            }
-
-            // Remove active class from all tabs
-            var tabs = document.querySelectorAll('header nav ul li a');
-            for (var i = 0; i < tabs.length; i++) {
-                tabs[i].classList.remove('active');
-            }
-
-            // Show the clicked tab's content and add active class to the clicked tab
-            document.getElementById(tabId).classList.add('active');
-            event.currentTarget.classList.add('active');
-        }
-    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="../../cis4930/style.css" rel="stylesheet" type="text/css">
+    <link href="../styles/BookSearch.css" rel="stylesheet" type="text/css">
+    <title>Checkout Books</title>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div id="branding">
-                <h1>Library System</h1>
-            </div>
-            <nav>
-                <ul>
-                <li><a href="Library_Member_Home.php" class="active">Home</a></li>
-                    <li><a href="#" onclick="showTab(event, 'checked-out')">Checked Out Books</a></li>
-                    <li><a href="#" onclick="showTab(event, 'reserved-events')">Reserved Events</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <div class="container">
-        <div id="Welcome" class="tab-content active">
-            <h2>Welcome to the Library System</h2>
-            <p>This is the home page of the library system. Here you can find information about the library, upcoming events, new arrivals, and more. Use the tabs above to navigate through different sections.</p>
-        </div>
-
-        <div id="checked-out" class="tab-content">
-            <h2>Checked Out Books</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Title</th>
-                        <th>Author</th> 
-                        <th>Due Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>The Great Gatsby</td>
-                        <td>F. Scott Fitzgerald</td>
-                        <td>2024-08-15</td>
-                    </tr>
-                    <tr>
-                        <td>To Kill a Mockingbird</td>
-                        <td>Harper Lee</td>
-                        <td>2024-08-20</td>
-                    </tr>
-                    <tr>
-                        <td>1984</td>
-                        <td>George Orwell</td>
-                        <td>2024-08-25</td>
-                    </tr>
-                    <!-- More rows as needed -->
-                </tbody>
-            </table>
-        </div>
-        <div id="reserved-events" class="tab-content">
-            <h2>Reserved Events</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Event</th>
-                        <th>Date</th>
-                        <th>Location</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Book Reading: Modern Classics</td>
-                        <td>2024-09-01</td>
-                        <td>Main Library Hall</td>
-                    </tr>
-                    <tr>
-                        <td>Author Meet & Greet: Jane Doe</td>
-                        <td>2024-09-15</td>
-                        <td>Conference Room B</td>
-                    </tr>
-                    <tr>
-                        <td>Writing Workshop: Fiction</td>
-                        <td>2024-09-25</td>
-                        <td>Room 101</td>
-                    </tr>
-                    <!-- More rows as needed -->
-                </tbody>
-            </table>
-        </div>
+    <!-- Top Right Buttons -->
+    <div class="top-right-buttons">
+        <a href="Library_Admin_Home.php">Home</a>
     </div>
+
+    <h1 align="center">Checkout Books</h1>
+
+    <div align="center">
+        <?php if ($userRole === 'admin' || $userRole === 'employee'): ?>
+            <label for="userSelect">Select User:</label>
+            <select id="userSelect" name="userSelect">
+                <?php foreach ($users as $user): ?>
+                    <option value="<?= $user['idLogin'] ?>"><?= $user['username'] ?></option>
+                <?php endforeach; ?>
+            </select>
+        <?php endif; ?>
+    </div>
+
+    <div id="bookTableContainer" align="center">
+        <table id="checkoutTable">
+            <thead>
+                <tr>
+                    <th>Book Name</th>
+                    <th>Author</th>
+                    <th>Description</th>
+                    <th>Copies</th>
+                    <th>Location</th>
+                    <th>Resource Type</th>
+                    <th>Genres</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function updateCheckoutTable(data) {
+            $('#checkoutTable tbody').empty();
+            data.forEach(function(book) {
+                var checkoutButton = book.BookCopies > 0 
+                    ? `<button class="checkoutButton" data-id="${book.BookId}">Checkout</button>` 
+                    : `<button class="checkoutButton" disabled>Out of Stock</button>`;
+
+                var row = `
+                    <tr>
+                        <td>${book.BookName}</td>
+                        <td>${book.Author}</td>
+                        <td>${book.bookDescription}</td>
+                        <td>${book.BookCopies}</td>
+                        <td>${book.location}</td>
+                        <td>${book.resourceType}</td>
+                        <td>${book.Genres}</td>
+                        <td>${checkoutButton}</td>
+                    </tr>
+                `;
+                $('#checkoutTable tbody').append(row);
+            });
+        }
+
+        function loadBooksForCheckout() {
+            $.ajax({
+                url: '../process/BookSearchProcess.php',
+                method: 'GET',
+                data: { query: ''},
+                dataType: 'json',
+                success: function(response) {
+                    updateCheckoutTable(response);
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            loadBooksForCheckout();
+        });
+
+        // Handle checkout button click
+        $(document).on('click', '.checkoutButton', function() {
+            var bookId = $(this).data('id');
+            var userId = $('#userSelect').val(); // Get selected user ID
+
+            $.ajax({
+                url: '../process/checkoutProcess.php',
+                method: 'POST',
+                data: { bookId: bookId, userId: userId },
+                success: function(response) {
+                    alert("Successfully checked out a book!");
+                    loadBooksForCheckout(); // Reload book list to update availability
+                }
+            });
+        });
+    </script>
 </body>
 </html>

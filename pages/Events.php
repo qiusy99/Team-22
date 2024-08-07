@@ -52,9 +52,7 @@ $mysqli->close();
 <body>
     <!-- Log Out button -->
     <div class="top-right-buttons">
-        <a href="Library_Member_Home.php">Home</a>
-        <a href="Checkout.php">CheckOut</a>
-        <a href="../process/logoutProcess.php">LogOut</a>
+        <a href="Library_Admin_Home.php">Home</a>
     </div>
 
     <div class="container">

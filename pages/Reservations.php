@@ -43,12 +43,41 @@ $mysqli->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Reservations</title>
     <link rel="stylesheet" href="../styles/Reservations.css">
+    <style>
+        body {
+            background: linear-gradient(to bottom, #6092A6, #CEECF2);
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            height: 791px;
+        }
+        
+        .top-right-buttons {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            gap: 10px;
+        }
+        .top-right-buttons a {
+            background-color: whitesmoke;
+            color: black;
+            padding: 10px 20px;
+            text-align: center;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
+            font-size: 18px;
+        }
+        .top-right-buttons a:hover {
+            background-color: #CEECF2;
+        }
+    </style>
 </head>
 <body>
     <div class="top-right-buttons">
         <a href="Checkout.php">CheckOut</a>
         <a href="../process/logoutProcess.php">LogOut</a>
-        <a href="Library_Member_Home.php">Home</a>
+        <a href="Library_Admin_Home.php">Home</a>
     </div>
 
     <div class="container">

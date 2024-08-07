@@ -14,36 +14,8 @@ ini_set('display_errors', 1);
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link href="../../cis4930/style.css" rel="stylesheet" type="text/css">
+    <link href="../styles/BookSearch.css" rel="stylesheet" type="text/css">
     <title>Team 22 Library</title>
-    <style>
-        body {
-            background: linear-gradient(to bottom, #6092A6, #CEECF2);
-            font-family: Arial, sans-serif;
-            font-size: 16px;
-            height: 612px;
-        }
-        
-        .top-right-buttons {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            display: flex;
-            gap: 10px;
-        }
-        .top-right-buttons a {
-            background-color: whitesmoke;
-            color: black;
-            padding: 10px 20px;
-            text-align: center;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            text-decoration: none;
-            font-size: 18px;
-        }
-        .top-right-buttons a:hover {
-            background-color: #CEECF2;
-        }
-    </style>
 </head>
 <body>
     <!-- Top Right Buttons -->
@@ -64,7 +36,7 @@ ini_set('display_errors', 1);
                     <th>Book Name</th>
                     <th>Author</th>
                     <th>Description</th>
-                    <th>Copies</th>
+                    <th>Available Copies</th>
                     <th>Location</th>
                     <th>Resource Type</th>
                     <th>Genres</th>

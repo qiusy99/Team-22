@@ -78,6 +78,10 @@
         <label for="Non-Fiction"> Non-Fiction</label><br>
         <input type="checkbox" id="Fiction" name="genre[]" value="Fiction">
         <label for="Fiction"> Fiction</label><br>
+        <input type="checkbox" id="Classic" name="genre[]" value="Classic">
+        <label for="Classic"> Classic</label><br>
+        <input type="checkbox" id="Thriller" name="genre[]" value="Thriller">
+        <label for="Thriller"> Thriller</label><br>
 
         <!-- Reset and Submit buttons-->
         <input type="reset">
